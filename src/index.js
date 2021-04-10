@@ -2,6 +2,7 @@ const express = require('express');
 const redis = require('redis');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 
@@ -87,7 +88,7 @@ if(mode === 'development') {
     );
     app.use(webpackHotMiddleware(compiler));
 }else{
-    app.use(express.static('static'))
+    app.use(express.static(path.join(__dirname, 'static')))
 }
 
 const PORT = process.env.PORT ?? 8080;
