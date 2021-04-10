@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap');
+
+body, .container {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #a6b2b7;
+  font-family: 'Oxanium', sand-serif;
+  width: 100vw;
+  height: 100vh;
+}
+
+.namePopup {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 280px;
+  height: 120px;
+  margin-top: -70px;
+  margin-left: -150px;
+  background: white;
+  padding: 10px;
+  font-size: 1.4em;
+
+  label {
+    span {
+      font-weight: 600;
+    }
+    input {
+      font-family: 'Oxanium', sand-serif;
+      font-weight: 500;
+      font-size: 1em;
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+      border: 2px solid black;
+      border-radius: 4px;
+    }
+  }
+  input[type='submit'] {
+    font-family: 'Oxanium', sand-serif;
+    font-weight: 500;
+    font-size: 1em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 4px;
+  }
+}
