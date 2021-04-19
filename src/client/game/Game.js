@@ -1,3 +1,5 @@
+import ControlElement from "./ControlElement";
+
 class Game {
     constructor({name ,playerId }) {
         if(name){
@@ -7,6 +9,15 @@ class Game {
             this.playerId = playerId;
             this.load();
         }
+        this.game = null;
+        this.container = document.createElement('div');
+        this.container.classList.add('gameContainer');
+        this.controlElement = new ControlElement(this.setReady.bind(this));
+        this.container.appendChild(this.controlElement.render());
+    }
+
+    render() {
+        return this.container;
     }
 
     connect() {
@@ -20,6 +31,7 @@ class Game {
                 this.playerId = data.playerId;
                 this.gameId = data.gameId;
                 console.log(this);
+                this.createSocket();
             })
             .catch(e => {
                 console.log(e);
@@ -37,11 +49,58 @@ class Game {
                 this.name = data.name;
                 this.gameId = data.gameId;
                 console.log(this)
+                this.createSocket();
             })
             .catch(e => {
                 console.log(e);
             })
     }
+
+
+    createSocket() {
+        this.refresh();
+        this.socket = setInterval(() => {
+            console.log('refresh');
+            this.refresh();
+        }, 3000);
+    }
+
+    refresh() {
+        fetch('/api/get', {
+            method: "GET",
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.game = data;
+                console.log(data)
+                this.updateUI();
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    }
+
+
+    updateUI() {
+        this.controlElement.update(this.game);
+    }
+
+    setReady(ready) {
+        fetch('/api/ready', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ready})
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.refresh();
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    }
+
 }
 
 

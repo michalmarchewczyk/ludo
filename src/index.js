@@ -25,14 +25,16 @@ app.use(
     })
 );
 
+store.clear();
+
 app.use(bodyParser.json())
 
 
 app.use((req, res, next) => {
-    console.log(`==== REQUEST: ${req.url} ====`)
-    console.log(req.session.id)
-    console.log(req.session);
-    console.log(`//// REQUEST: ${req.url} ////`)
+    // console.log(`==== REQUEST: ${req.url} ====`)
+    // console.log(req.session.id)
+    // console.log(req.session);
+    // console.log(`//// REQUEST: ${req.url} ////`)
     // store.all((error, sessions) => {
     //     console.log(sessions);
     // })
