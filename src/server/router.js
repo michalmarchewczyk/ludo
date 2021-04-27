@@ -105,7 +105,7 @@ router.post('/confirm', (req, res) => {
         res.sendStatus(404);
         return;
     }
-    game.confirm();
+    game.confirm(playerId);
     res.json(game.get(playerId));
 })
 

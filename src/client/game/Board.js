@@ -49,6 +49,10 @@ class Board {
             this.game.confirm();
         }, 600);
     }
+
+    confirmAFK() {
+        this.dice.hide();
+    }
 }
 
 

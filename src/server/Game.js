@@ -1,5 +1,7 @@
 const uuid = require('uuid');
 
+const TURN_TIME = 20;
+
 class Game {
     constructor() {
         this.id = uuid.v4();
@@ -7,7 +9,7 @@ class Game {
         this.players = [];
         this.pieces = [];
         this.turn = null;
-        this.pending = false;
+        this.pending = null;
     }
 
     addPlayer(player) {
@@ -21,7 +23,12 @@ class Game {
             players: this.players,
             currentPlayer: this.players.find(p => p.id === playerId),
             turn: this.turn,
+            pending: this.pending,
+            waiting: TURN_TIME - Math.floor(
+                (this.pending ? Date.now() - this.pending : 0) / 1000
+            ),
         }
+        this.refresh();
         return gameInfo;
     }
 
@@ -48,16 +55,24 @@ class Game {
             ];
         this.turn = {
             player: nextPlayer,
-            number: Math.floor(Math.random() * (6 - 1)) + 1,
+            number: Math.floor(Math.random() * (7 - 1)) + 1,
         }
         console.log('NEW TURN: ' + this.turn.player.id + ' ' + this.turn.number);
-        this.pending = true;
+        this.pending = Date.now();
     }
 
-    confirm() {
+    confirm(playerId) {
+        if(playerId !== this.turn.player.id) return;
         console.log('CONFIRM: ' + this.turn.player.id + ' ' + this.turn.number);
-        this.pending = false;
+        this.pending = null;
         this.nextMove();
+    }
+
+    refresh(){
+        let waiting = TURN_TIME - Math.floor((this.pending ? Date.now() - this.pending : 0) / 1000);
+        if(waiting < 1){
+            this.confirm(this.turn.player.id);
+        }
     }
 }
 

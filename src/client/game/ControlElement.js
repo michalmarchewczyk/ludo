@@ -19,15 +19,18 @@ class ControlElement {
     update(game){
         this.container.innerHTML = `<h2>Ready?: </h2>`;
         this.container.innerHTML += `<button>${game.currentPlayer.ready ? 'ready' : 'not ready'}</button>`;
-        this.container.innerHTML += `<br><h2>Players: </h2>`;
+        this.container.innerHTML += `<br><h2>Players:</h2>`;
         game.players.forEach(player => {
-            console.log(game, player.id);
+            // console.log(game, player.id);
             this.container.innerHTML += `
                 <span
                  class="gameControlPlayer"
                  style="background: ${COLORS[player.color]}; border-width: ${game.turn?.player?.id === player.id ? '4px' : '2px' }"
                 >
-                    ${player.id === game.currentPlayer.id ? '(you)' : ''} ${player.name} (${player.ready ? 'ready' : 'not ready'}) 
+                    ${player.id === game.currentPlayer.id ? '(you)' : ''} ${player.name} (${player.ready ? 'ready' : 'not ready'})
+                    ${game.turn?.player?.id === player.id ? `
+                        <span class="gameControlPlayerTime">${game.waiting}</span>
+                    ` : ''}
                 </span>
             `;
         });

@@ -83,8 +83,11 @@ class Game {
                     this.updateUI();
                     this.move();
                 }
+                if(this.game?.turn?.player?.id === this.playerId && data.turn?.player?.id !== this.playerId){
+                    this.board.confirmAFK();
+                }
                 this.game = data;
-                console.log(data)
+                // console.log(data)
                 this.updateUI();
             })
             .catch(e => {
