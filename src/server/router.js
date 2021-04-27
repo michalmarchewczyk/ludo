@@ -31,7 +31,7 @@ router.post('/connect', (req, res) => {
     req.session.playerId = player.id;
     state.players.push(player);
 
-    let game = state.games.find(game => game.players.length < 4)
+    let game = state.games.find(game => game.players.length < 4 && !game.started)
     if(!game){
         game = new Game();
         state.games.push(game);
@@ -40,6 +40,7 @@ router.post('/connect', (req, res) => {
     game.addPlayer(player);
     player.gameId = game.id;
     player.color = ['red', 'blue', 'green', 'yellow'][game.players.length-1];
+    game.checkReady();
     res.json({playerId: player.id, gameId: game.id})
 })
 
@@ -91,6 +92,21 @@ router.post('/ready', (req, res) => {
     }
     player.setReady(!!ready);
     res.json(player);
+})
+
+
+router.post('/confirm', (req, res) => {
+    const gameId = req.session.gameId;
+    const playerId = req.session.playerId;
+    const game = state.games.find(game => game.id === gameId);
+    const player = state.players.find(p => p.id === playerId);
+
+    if(!game){
+        res.sendStatus(404);
+        return;
+    }
+    game.confirm();
+    res.json(game.get(playerId));
 })
 
 module.exports = router;

@@ -1,0 +1,88 @@
+const FIELDS = [
+    {name: 'r1', x: 0, y: 0},
+    {name: 'r2', x: 1, y: 0},
+    {name: 'r3', x: 0, y: 1},
+    {name: 'r4', x: 1, y: 1},
+
+    {name: 'r5', x: 1, y: 5},
+    {name: 'r6', x: 2, y: 5},
+    {name: 'r7', x: 3, y: 5},
+    {name: 'r8', x: 4, y: 5},
+
+    {name: 'b1', x: 9, y: 0},
+    {name: 'b2', x: 10, y: 0},
+    {name: 'b3', x: 9, y: 1},
+    {name: 'b4', x: 10, y: 1},
+
+    {name: 'b5', x: 5, y: 1},
+    {name: 'b6', x: 5, y: 2},
+    {name: 'b7', x: 5, y: 3},
+    {name: 'b8', x: 5, y: 4},
+
+    {name: 'g1', x: 9, y: 9},
+    {name: 'g2', x: 10, y: 9},
+    {name: 'g3', x: 9, y: 10},
+    {name: 'g4', x: 10, y: 10},
+
+    {name: 'g5', x: 9, y: 5},
+    {name: 'g6', x: 8, y: 5},
+    {name: 'g7', x: 7, y: 5},
+    {name: 'g8', x: 6, y: 5},
+
+    {name: 'y1', x: 0, y: 9},
+    {name: 'y2', x: 1, y: 9},
+    {name: 'y3', x: 0, y: 10},
+    {name: 'y4', x: 1, y: 10},
+
+    {name: 'y5', x: 5, y: 9},
+    {name: 'y6', x: 5, y: 8},
+    {name: 'y7', x: 5, y: 7},
+    {name: 'y8', x: 5, y: 6},
+
+    {name: '1', x: 0, y: 4},
+    {name: '2', x: 1, y: 4},
+    {name: '3', x: 2, y: 4},
+    {name: '4', x: 3, y: 4},
+    {name: '5', x: 4, y: 4},
+    {name: '6', x: 4, y: 3},
+    {name: '7', x: 4, y: 2},
+    {name: '8', x: 4, y: 1},
+    {name: '9', x: 4, y: 0},
+    {name: '10', x: 5, y: 0},
+
+    {name: '11', x: 6, y: 0},
+    {name: '12', x: 6, y: 1},
+    {name: '13', x: 6, y: 2},
+    {name: '14', x: 6, y: 3},
+    {name: '15', x: 6, y: 4},
+    {name: '16', x: 7, y: 4},
+    {name: '17', x: 8, y: 4},
+    {name: '18', x: 9, y: 4},
+    {name: '19', x: 10, y: 4},
+    {name: '20', x: 10, y: 5},
+
+    {name: '21', x: 10, y: 6},
+    {name: '22', x: 9, y: 6},
+    {name: '23', x: 8, y: 6},
+    {name: '24', x: 7, y: 6},
+    {name: '25', x: 6, y: 6},
+    {name: '26', x: 6, y: 7},
+    {name: '27', x: 6, y: 8},
+    {name: '28', x: 6, y: 9},
+    {name: '29', x: 6, y: 10},
+    {name: '30', x: 5, y: 10},
+
+    {name: '31', x: 4, y: 10},
+    {name: '32', x: 4, y: 9},
+    {name: '33', x: 4, y: 8},
+    {name: '34', x: 4, y: 7},
+    {name: '35', x: 4, y: 6},
+    {name: '36', x: 3, y: 6},
+    {name: '37', x: 2, y: 6},
+    {name: '38', x: 1, y: 6},
+    {name: '39', x: 0, y: 6},
+    {name: '40', x: 0, y: 5},
+];
+
+
+export default FIELDS;

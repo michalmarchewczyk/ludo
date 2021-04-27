@@ -4,6 +4,7 @@ body, .container {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  overflow-y: auto;
   background: #a6b2b7;
   font-family: 'Oxanium', sans-serif;
   width: 100vw;
@@ -86,14 +87,75 @@ body, .container {
     margin-left: 8px;
     margin-right: 8px;
     font-size: 20px;
+    cursor: pointer;
   }
 
   .gameControlPlayer {
+    display: inline-block;
+    width: auto;
     border: 2px solid black;
     border-radius: 2px;
     padding: 8px;
     font-family: 'Oxanium', sans-serif;
     margin-right: 8px;
     font-size: 20px;
+  }
+}
+
+
+.Board {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  margin-left: -400px;
+  width: 800px;
+  height: 600px;
+  border: 4px solid black;
+  border-radius: 6px;
+  background: white;
+
+  .BoardMain {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    left: 200px;
+    background-size: cover;
+  }
+
+  .BoardDebug {
+    position: absolute;
+    outline: 2px solid cyan;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    text-align: center;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
+
+
+.Dice {
+  position: absolute;
+  top: 80px;
+  left: 30px;
+  width: 130px;
+  height: 130px;
+  border: 4px solid black;
+  border-radius: 10px;
+
+
+  button {
+    display: block;
+    position: absolute;
+    border: 4px solid black;
+    border-radius: 10px;
+    top: -60px;
+    height: 40px;
+    left: -4px;
+    width: 138px;
+    background: white;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 16px;
   }
 }

@@ -1,4 +1,5 @@
 import ControlElement from "./ControlElement";
+import Board from "./Board";
 
 class Game {
     constructor({name ,playerId }) {
@@ -14,6 +15,8 @@ class Game {
         this.container.classList.add('gameContainer');
         this.controlElement = new ControlElement(this.setReady.bind(this));
         this.container.appendChild(this.controlElement.render());
+        this.board = new Board(this);
+        this.container.appendChild(this.board.render());
     }
 
     render() {
@@ -62,7 +65,7 @@ class Game {
         this.socket = setInterval(() => {
             console.log('refresh');
             this.refresh();
-        }, 3000);
+        }, 500);
     }
 
     refresh() {
@@ -72,6 +75,14 @@ class Game {
         })
             .then(res => res.json())
             .then(data => {
+                if(!(this.game?.started) && data.started === true){
+                    this.start();
+                }
+                if(!(this.game?.turn?.player.id === this.playerId) && data.turn?.player?.id === this.playerId){
+                    this.game = data;
+                    this.updateUI();
+                    this.move();
+                }
                 this.game = data;
                 console.log(data)
                 this.updateUI();
@@ -101,6 +112,32 @@ class Game {
             })
     }
 
+    start() {
+        // alert('STARTED');
+        this.board.show();
+    }
+
+
+    move(){
+        console.log(this.game);
+        this.board.move();
+        // alert('YOUR MOVE: ' + this.game?.turn?.number);
+    }
+
+    confirm() {
+        fetch('/api/confirm', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({})
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.refresh();
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    }
 }
 
 
