@@ -11,6 +11,18 @@ body, .container {
   height: 100vh;
 }
 
+#selectLang {
+  display: block;
+  position: fixed;
+  z-index: 1000000;
+  border: 4px solid black;
+  right: 10px;
+  top: 10px;
+  font-size: 24px;
+  font-family: 'Oxanium', sand-serif;
+  border-radius: 6px;
+}
+
 .namePopup {
   display: block;
   position: absolute;
@@ -214,10 +226,10 @@ body, .container {
   }
 
   @keyframes blink {
-    0% { background: none !important; }
-    29.9% { background: none !important; }
-    30% { background: initial }
-    100% { background: initial }
+    0% { background: none !important; border: none !important; }
+    29.9% { background: none !important; border: none !important; }
+    30% { background: initial; border: initial; }
+    100% { background: initial; border: initial; }
   }
 
 }

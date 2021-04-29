@@ -2,7 +2,7 @@ const PATHS = require('./paths');
 
 const uuid = require('uuid');
 
-const TURN_TIME = 10;
+const TURN_TIME = 30;
 
 class Game {
     constructor() {
@@ -79,7 +79,7 @@ class Game {
             let index = PATHS[color].findIndex(p => p === piece.position);
             let to = PATHS[color][index+number];
             let find = playerPieces.find(p => {
-                return p.position === to && to.charAt(0) !== color.charAt(0)
+                return p.position === to && to.charAt(0) === color.charAt(0)
             });
             if(!isNaN(piece.position) && to && !find){
                 options.push({piece, from: piece.position, to: to})
@@ -139,7 +139,7 @@ class Game {
 
     move(from, to){
         console.log('MOVE: ', from, ' -> ', to);
-        let piece = this.pieces.find(p => p.position === from);
+        let piece = this.pieces.find(p => p.position === from && p.color === this.turn.player.color);
         let others = this.pieces.filter(p => p.position === to && p.color !== this.turn.player.color);
         others.forEach(piece => {
             piece.position = piece.original;
@@ -164,7 +164,7 @@ class Game {
             let found8 = playerPieces.find(p => {
                 return p.position === player.color.charAt(0) + '8'
             });
-            if(found5 || found6 || found7 || found8){
+            if(found5 && found6 && found7 && found8){
                 this.win = player;
             }
         })

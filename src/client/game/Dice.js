@@ -5,6 +5,7 @@ import dice4 from '../images/dice4.svg';
 import dice5 from '../images/dice5.svg';
 import dice6 from '../images/dice6.svg';
 import SpeechSynthesis from "./SpeechSynthesis";
+import localization from "./Localization";
 
 class Dice {
     constructor(next) {
@@ -13,7 +14,7 @@ class Dice {
         this.container.style.display = 'none';
         this.container.style.background = "none";
         this.diceButton = document.createElement('button');
-        this.diceButton.innerText = `RZUT KOSTKĄ`;
+        this.diceButton.innerHTML = `<span class="localized">roll</span>`;
         this.container.appendChild(this.diceButton);
         this.next = next;
         this.value = 0;
