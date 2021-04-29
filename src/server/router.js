@@ -101,11 +101,13 @@ router.post('/confirm', (req, res) => {
     const game = state.games.find(game => game.id === gameId);
     const player = state.players.find(p => p.id === playerId);
 
+    const {from} = req.body;
+
     if(!game){
         res.sendStatus(404);
         return;
     }
-    game.confirm(playerId);
+    game.confirm(playerId, from);
     res.json(game.get(playerId));
 })
 

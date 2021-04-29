@@ -1,6 +1,7 @@
 import board from '../images/board.svg';
 import FIELDS from "./boardFields";
 import Dice from "./Dice";
+import Piece from "./Piece";
 
 class Board {
     constructor(game) {
@@ -15,7 +16,9 @@ class Board {
         this.fields = FIELDS;
         this.dice = new Dice(this.confirm.bind(this));
         this.container.appendChild(this.dice.render());
+        this.pieces = [];
         this.debug();
+        this.confirmed = false;
     }
 
     render(){
@@ -39,19 +42,55 @@ class Board {
         });
     }
 
+    updatePieces(){
+        this.pieces = [];
+        this.game.state?.pieces?.forEach(piece => {
+            let newPiece = new Piece(piece.color, piece.position)
+            let option = this.game.state?.turn?.options.find(o => o.from === piece.position)
+            if(option){
+                if(this.confirmed){
+                    const select = () => {
+                        console.log('selected option', option);
+                        this.dice.hide();
+                        this.game.confirm(option.from);
+                        this.confirmed = false;
+                    }
+                    newPiece.enable(option.to, select);
+                }
+            }
+            this.pieces.push(
+                newPiece
+            )
+        });
+        // console.log('PIECES', this.pieces);
+        this.main.querySelectorAll('.Piece').forEach(el => el.remove());
+        this.pieces.forEach(piece => {
+            this.main.appendChild(piece.render());
+        })
+    }
+
     move(){
-        this.dice.show(this.game.game.turn?.number);
+        this.dice.show(this.game.state.turn?.number);
     }
 
     confirm() {
-        setTimeout(() => {
-            this.dice.hide();
-            this.game.confirm();
-        }, 600);
+        // alert('CONFIRMED, OPTIONS: ' + this.game.state?.turn?.options);
+        console.log(this.game.state?.turn?.options)
+        this.confirmed = true;
+        if(this.game.state?.turn?.options?.length > 0){
+            this.game.refresh();
+        }else{
+            setTimeout(() => {
+                this.dice.hide();
+                this.game.confirm();
+                this.confirmed = false;
+            }, 600);
+        }
     }
 
     confirmAFK() {
         this.dice.hide();
+        this.confirmed = false;
     }
 }
 

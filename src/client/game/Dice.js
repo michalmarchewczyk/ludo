@@ -30,12 +30,14 @@ class Dice {
     show(value){
         this.container.style.display = "block";
         this.value = value;
+        this.diceButton.style.display = 'block';
     }
 
     display(){
         this.container.style.background = `url(${
             ['', dice1, dice2, dice3, dice4, dice5, dice6][this.value]
         })`;
+        this.diceButton.style.display = 'none';
     }
 
     hide(){

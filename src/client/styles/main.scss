@@ -147,7 +147,7 @@ body, .container {
     height: 36px;
     font-size: 20px;
     text-align: center;
-    opacity: 0.4;
+    opacity: 0;
     pointer-events: none;
   }
 }
@@ -176,4 +176,61 @@ body, .container {
     font-family: 'Oxanium', sans-serif;
     font-size: 16px;
   }
+}
+
+
+
+.Piece {
+  position: absolute;
+  border: 2px solid black;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+
+
+  &.PieceEnabled {
+    //border: 2px solid red;
+    animation: blink 0.3s linear;
+    cursor: pointer;
+
+    &:hover{
+      animation: none;
+      //border: 2px solid green;
+    }
+  }
+
+
+  .PiecePlaceholder {
+    display: none;
+  }
+
+  &:hover{
+    .PiecePlaceholder{
+      display: block;
+    }
+  }
+
+  @keyframes blink {
+    0% { background: none !important; }
+    29.9% { background: none !important; }
+    30% { background: initial }
+    100% { background: initial }
+  }
+
+}
+
+
+.PiecePlaceholder {
+  position: absolute;
+  border: 3px solid black;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  opacity: 0.8;
 }

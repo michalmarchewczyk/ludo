@@ -10,7 +10,7 @@ class Game {
             this.playerId = playerId;
             this.load();
         }
-        this.game = null;
+        this.state = null;
         this.container = document.createElement('div');
         this.container.classList.add('gameContainer');
         this.controlElement = new ControlElement(this.setReady.bind(this));
@@ -63,7 +63,7 @@ class Game {
     createSocket() {
         this.refresh();
         this.socket = setInterval(() => {
-            console.log('refresh');
+            // console.log('refresh');
             this.refresh();
         }, 500);
     }
@@ -75,18 +75,22 @@ class Game {
         })
             .then(res => res.json())
             .then(data => {
-                if(!(this.game?.started) && data.started === true){
+                if(!this.state?.win && data.win){
+                    console.log('WINNER: ' + data.win.color);
+                    alert('WINNER: ' + data.win.color);
+                }
+                if(!(this.state?.started) && data.started === true){
                     this.start();
                 }
-                if(!(this.game?.turn?.player.id === this.playerId) && data.turn?.player?.id === this.playerId){
-                    this.game = data;
+                if(!(this.state?.turn?.player.id === this.playerId) && data.turn?.player?.id === this.playerId){
+                    this.state = data;
                     this.updateUI();
                     this.move();
                 }
-                if(this.game?.turn?.player?.id === this.playerId && data.turn?.player?.id !== this.playerId){
+                if(this.state?.turn?.player?.id === this.playerId && data.turn?.player?.id !== this.playerId){
                     this.board.confirmAFK();
                 }
-                this.game = data;
+                this.state = data;
                 // console.log(data)
                 this.updateUI();
             })
@@ -97,7 +101,8 @@ class Game {
 
 
     updateUI() {
-        this.controlElement.update(this.game);
+        this.controlElement.update(this.state);
+        this.board.updatePieces();
     }
 
     setReady(ready) {
@@ -122,16 +127,16 @@ class Game {
 
 
     move(){
-        console.log(this.game);
+        console.log(this.state);
         this.board.move();
-        // alert('YOUR MOVE: ' + this.game?.turn?.number);
+        // alert('YOUR MOVE: ' + this.state?.turn?.number);
     }
 
-    confirm() {
+    confirm(from) {
         fetch('/api/confirm', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({})
+            body: JSON.stringify({from: from ?? null})
         })
             .then(res => res.json())
             .then(data => {
