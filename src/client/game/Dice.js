@@ -4,6 +4,7 @@ import dice3 from '../images/dice3.svg';
 import dice4 from '../images/dice4.svg';
 import dice5 from '../images/dice5.svg';
 import dice6 from '../images/dice6.svg';
+import SpeechSynthesis from "./SpeechSynthesis";
 
 class Dice {
     constructor(next) {
@@ -20,6 +21,7 @@ class Dice {
             this.display();
             this.next();
         }
+        this.speaker = new SpeechSynthesis();
         // this.container.style.background = `url(${dice6})`;
     }
 
@@ -38,6 +40,7 @@ class Dice {
             ['', dice1, dice2, dice3, dice4, dice5, dice6][this.value]
         })`;
         this.diceButton.style.display = 'none';
+        this.speaker.speakValue(this.value);
     }
 
     hide(){
