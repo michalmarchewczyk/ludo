@@ -12,7 +12,12 @@ const LANGUAGES = {
         '3': 'trzy',
         '4': 'cztery',
         '5': 'pięć',
-        '6': 'sześć'
+        '6': 'sześć',
+        'winner': 'Zwycięzca: ',
+        'red': 'czerwony',
+        'blue': 'niebieski',
+        'green': 'zielony',
+        'yellow': 'żółty',
     },
     "en-US": {
         "nickname": "Your name:",
@@ -27,7 +32,12 @@ const LANGUAGES = {
         '3': 'three',
         '4': 'four',
         '5': 'five',
-        '6': 'six'
+        '6': 'six',
+        'winner': 'Winner: ',
+        'red': 'red',
+        'blue': 'blue',
+        'green': 'green',
+        'yellow': 'yellow',
     }
 }
 

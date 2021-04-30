@@ -1,5 +1,6 @@
 import ControlElement from "./ControlElement";
 import Board from "./Board";
+import localization from "./Localization";
 
 class Game {
     constructor({name ,playerId }) {
@@ -77,7 +78,7 @@ class Game {
             .then(data => {
                 if(!this.state?.win && data.win){
                     console.log('WINNER: ' + data.win.color);
-                    alert('WINNER: ' + data.win.color);
+                    alert(localization.translate('winner') + localization.translate(data.win.color));
                 }
                 if(!(this.state?.started) && data.started === true){
                     this.start();
