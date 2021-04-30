@@ -25,13 +25,15 @@ class ControlElement {
                 '<span class="localized">not-ready</span>'}</button>`;
         this.container.innerHTML += `<br><h2><span class="localized">players</span></h2>`;
         game.players.forEach(player => {
-            // console.log(game, player.id);
+            console.log(game, player.id);
             this.container.innerHTML += `
                 <span
                  class="gameControlPlayer"
                  style="background: ${COLORS[player.color]}; border-width: ${game.turn?.player?.id === player.id ? '4px' : '2px' }"
                 >
-                    ${player.id === game.currentPlayer.id ? '(<span class="localized">you</span>)' : ''} ${player.name} (${player.ready ? '<span class="localized">ready</span>' : '<span class="localized">not-ready</span>'})
+                    ${player.id === game.currentPlayer.id ? '(<span class="localized">you</span>)' : ''}
+                    ${player.name}
+                    ${!game.started ? player.ready ? '(<span class="localized">ready</span>)' : '(<span class="localized">not-ready</span>)' : ''}
                     ${game.turn?.player?.id === player.id ? `
                         <span class="gameControlPlayerTime">${game.waiting}</span>
                     ` : ''}
@@ -41,6 +43,7 @@ class ControlElement {
         this.container.children[1].onclick = () => {
             this.setReady(!game.currentPlayer.ready);
             this.container.children[1].innerHTML = (!game.currentPlayer.ready) ? '<span class="localized">ready</span>' : '<span class="localized">not-ready</span>';
+            localization.refresh();
         }
         localization.refresh();
     }
