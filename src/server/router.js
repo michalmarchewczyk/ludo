@@ -8,7 +8,10 @@ const Player = require('./Player');
 
 
 router.get('/connect', (req, res) => {
-    if(req.session.playerId && req.session.gameId){
+    let findGame = state.games.find(g =>
+        g.id === req.session.gameId
+        && g.players.find(p => p.id === req.session.playerId));
+    if(req.session.playerId && req.session.gameId && findGame){
         res.json({
             msg: 'inGame',
             playerId: req.session.playerId,

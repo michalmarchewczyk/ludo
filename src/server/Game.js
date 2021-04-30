@@ -1,4 +1,5 @@
 const PATHS = require('./paths');
+const state = require('./state');
 
 const uuid = require('uuid');
 
@@ -166,6 +167,10 @@ class Game {
             });
             if(found5 && found6 && found7 && found8){
                 this.win = player;
+                setTimeout(() => {
+                    console.log('DELETED GAME:', this.id);
+                    state.games = state.games.filter(g => g.id !== this.id);
+                }, 10000);
             }
         })
     }

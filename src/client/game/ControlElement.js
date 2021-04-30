@@ -25,7 +25,7 @@ class ControlElement {
                 '<span class="localized">not-ready</span>'}</button>`;
         this.container.innerHTML += `<br><h2><span class="localized">players</span></h2>`;
         game.players.forEach(player => {
-            console.log(game, player.id);
+            // console.log(game, player.id);
             this.container.innerHTML += `
                 <span
                  class="gameControlPlayer"
